@@ -1,0 +1,24 @@
+{
+  "name": "hi-jm",
+  "version": "0.2.0",
+  "description": "A sample Node.js app",
+  "main": "test.js",
+  "scripts": {
+    "start": "node test.js"
+  },
+  "dependencies": {
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmiddya/test"
+  },
+  "keywords": [
+    "node",
+    "heroku"
+  ],
+  "author": "J. Middya"
+  "license": "MIT"
+}

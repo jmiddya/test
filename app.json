@@ -2,5 +2,6 @@
   "name": "Node.js Testing on Heroku",
   "description": "Node.js app using Express",
   "repository": "https://github.com/jmiddya/test",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "static"]
 }

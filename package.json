@@ -7,6 +7,7 @@
     "start": "node test.js"
   },
   "dependencies": {
+    "express": "^4.0.0"
   },
   "engines": {
     "node": "0.12.x"
@@ -17,7 +18,8 @@
   },
   "keywords": [
     "node",
-    "heroku"
+    "heroku",
+    "express"
   ],
   "author": "J. Middya",
   "license": "MIT"

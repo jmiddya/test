@@ -1,7 +1,7 @@
 {
   "name": "Node.js Testing on Heroku",
-  "description": "Node.js app using Express",
+  "description": "Node.js basic testing app",
   "repository": "https://github.com/jmiddya/test",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
+  "keywords": ["node"]
 }

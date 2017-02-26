@@ -3,5 +3,5 @@
   "description": "Node.js basic testing app",
   "repository": "https://github.com/jmiddya/test",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node"]
+  "keywords": ["node", "express", "static"]
 }

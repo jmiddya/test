@@ -1,6 +1,6 @@
 {
   "name": "hi-jm",
-  "version": "0.2.0",
+  "version": "0.1",
   "description": "A sample Node.js app",
   "main": "test.js",
   "scripts": {

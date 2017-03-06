@@ -41,8 +41,8 @@ try {
 }
 
 app.get('/webhook', function(request, response) {
-  console.log(request);	
-  getWeather(request).then(weatherJson => {
+  //console.log(request);	
+  getWeather('Rome').then(weatherJson => {
 		  var weatherDetails = '';
 		  	
 		  var temp = weatherJson.main.temp - 273.15;

@@ -9,7 +9,7 @@ app.get('/', function(request, response) {
 })
 
 //////////JM : START//////////
-var location = 'Kolkata'
+
 var getWeather = function ( location) {
   var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=f953e7b081a49dc14a56671ffa303848';
   return fetch(url, {
@@ -42,6 +42,7 @@ try {
 
 app.get('/webhook', function(request, response) {
   console.log(request);	
+  var location = 'Kolkata';	
   getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';
 		  	

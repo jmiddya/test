@@ -94,10 +94,10 @@ app.post('/webhook', function(request, response) {
     
 	  	  //////////////// Preparing output JSON : START /////////////////
 	  	  var outJSON = {
-		  "speech": "Testing...",
+		  "speech": weatherDetails,
 		  "displayText": weatherDetails,
 		  "data": "Test Data",
-		  "contextOut": ["Test Context Output"],
+		  "contextOut": [Forecast],
 		  "source": "openweathermap"
 		  }
 	  	  //////////////// Preparing output JSON : END /////////////////

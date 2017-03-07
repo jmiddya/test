@@ -91,7 +91,7 @@ app.post('/webhook', function(request, response) {
 		  weatherDetails = weatherDetails + ' in ' + location;
     
 		  //response.send(weatherDetails);
-	  	  response.send(temp); 	
+	  	  response.send(location); 	
       })
 })
 

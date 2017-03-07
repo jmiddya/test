@@ -74,7 +74,7 @@ app.post('/webhook', function(request, response) {
   //console.log(request.body);	
   console.log(location);
   response.send(location); 	
-  getWeather(location).then(weatherJson => {
+  /*getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';
 		  	
 		  var temp = weatherJson.main.temp - 273.15;
@@ -93,7 +93,7 @@ app.post('/webhook', function(request, response) {
     
 		  //response.send(weatherDetails);
 	  	  response.send(location); 	
-      })
+      })*/
 })
 
 //////////JM : END//////////

@@ -41,7 +41,8 @@ try {
 }
 
 app.get('/webhook', function(request, response) {
-  var location = request.query.q;
+  //var location = request.query.q;
+  var location = request.param.geo-city;	
   console.log(location);
   getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';

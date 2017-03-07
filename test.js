@@ -75,8 +75,8 @@ app.post('/webhook', function(request, response) {
   console.log(location);
   //response.send(location); 	
   getWeather(location).then(weatherJson => {
-	  	  response.send(weatherJson);
-		  /*var weatherDetails = '';
+	  	  //response.send(weatherJson);
+		  var weatherDetails = '';
 		  	
 		  var temp = weatherJson.main.temp - 273.15;
 		  weatherDetails = weatherDetails + 'Current temperature : ' + temp + ' C';
@@ -92,7 +92,17 @@ app.post('/webhook', function(request, response) {
 			
 		  weatherDetails = weatherDetails + ' in ' + location;
     
-		  response.send(weatherDetails);*/
+	  	  //////////////// Preparing output JSON : START /////////////////
+	  	  Var outJSON = '{
+		  "speech": "Testing...",
+		  "displayText": weatherDetails,
+		  "data": {...},
+		  "contextOut": [...],
+		  "source": "openweathermap"
+		  }'
+	  	  //////////////// Preparing output JSON : END /////////////////
+	  
+		  response.send(outJSON);
       })
 })
 

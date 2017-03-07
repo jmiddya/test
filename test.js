@@ -14,6 +14,16 @@ app.get('/', function(request, response) {
 
 //////////JM : START//////////
 
+// Arbitrary value used to validate a webhook
+const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
+  (process.env.MESSENGER_VALIDATION_TOKEN) :
+  config.get('validationToken');
+
+// Generate a page access token for your page from the App Dashboard
+const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
+  (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
+  config.get('pageAccessToken');
+
 var getWeather = function ( location) {
   var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + location + '&appid=f953e7b081a49dc14a56671ffa303848';
   return fetch(url, {
@@ -44,30 +54,28 @@ try {
   interactive = require('node-wit').interactive;
 }
 
-app.get('/webhook', function(request, response) {
-  var location = request.query.city;
-  //console.log(request.query);	
-  console.log(location);
-  getWeather(location).then(weatherJson => {
-		  var weatherDetails = '';
-		  	
-		  var temp = weatherJson.main.temp - 273.15;
-		  weatherDetails = weatherDetails + 'Current temperature : ' + temp + ' C';
-			
-		  var humid = weatherJson.main.humidity;
-		  weatherDetails = weatherDetails + ', Humidity : ' + humid + '%';
-				
-	    	  var cloud = weatherJson.clouds.all;
-		  weatherDetails = weatherDetails + ', Cloud : ' +cloud + '%';
-			
-		  var desc = weatherJson.weather[0].description;
-		  weatherDetails = weatherDetails + ', Overall weather : ' + desc;
-			
-		  weatherDetails = weatherDetails + ' in ' + location;
-    
-		  response.send(weatherDetails);
-      })
-})
+/*app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === VALIDATION_TOKEN) {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+	console.log(JSON.stringify(req.query));
+    res.sendStatus(403);          
+  }  
+});*/
+
+// Webhook setup
+app.get('/webhook', (req, res) => {
+  if (req.query['hub.mode'] === 'subscribe' &&
+    req.query['hub.verify_token'] === VALIDATION_TOKEN) {
+    res.send(req.query['hub.challenge']);
+  } else {
+    res.sendStatus(400);
+  }
+});
+
 
 app.post('/webhook', function(request, response) {
   var location = request.body.result.parameters.city;

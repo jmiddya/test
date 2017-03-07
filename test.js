@@ -57,7 +57,7 @@ app.get('/webhook', function(request, response) {
 		  var humid = weatherJson.main.humidity;
 		  weatherDetails = weatherDetails + ', Humidity : ' + humid + '%';
 				
-	    var cloud = weatherJson.clouds.all;
+	    	  var cloud = weatherJson.clouds.all;
 		  weatherDetails = weatherDetails + ', Cloud : ' +cloud + '%';
 			
 		  var desc = weatherJson.weather[0].description;
@@ -73,6 +73,7 @@ app.post('/webhook', function(request, response) {
   var location = request.body.result.parameters.city;
   //console.log(request.body);	
   console.log(location);
+  response.send(location); 	
   getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';
 		  	
@@ -82,7 +83,7 @@ app.post('/webhook', function(request, response) {
 		  var humid = weatherJson.main.humidity;
 		  weatherDetails = weatherDetails + ', Humidity : ' + humid + '%';
 				
-	    var cloud = weatherJson.clouds.all;
+	          var cloud = weatherJson.clouds.all;
 		  weatherDetails = weatherDetails + ', Cloud : ' +cloud + '%';
 			
 		  var desc = weatherJson.weather[0].description;

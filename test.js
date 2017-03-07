@@ -65,6 +65,31 @@ app.get('/webhook', function(request, response) {
       })
 })
 
+app.post('/webhook', function(request, response) {
+  //var location = request.query.q;
+  var location = request.param('geo-city');	
+  console.log(location);
+  getWeather(location).then(weatherJson => {
+		  var weatherDetails = '';
+		  	
+		  var temp = weatherJson.main.temp - 273.15;
+		  weatherDetails = weatherDetails + 'Current temperature : ' + temp + ' C';
+			
+		  var humid = weatherJson.main.humidity;
+		  weatherDetails = weatherDetails + ', Humidity : ' + humid + '%';
+				
+	    var cloud = weatherJson.clouds.all;
+		  weatherDetails = weatherDetails + ', Cloud : ' +cloud + '%';
+			
+		  var desc = weatherJson.weather[0].description;
+		  weatherDetails = weatherDetails + ', Overall weather : ' + desc;
+			
+		  weatherDetails = weatherDetails + ' in ' + location;
+    
+		  response.send(weatherDetails);
+      })
+})
+
 //////////JM : END//////////
 
 app.listen(app.get('port'), function() {

@@ -97,7 +97,7 @@ app.post('/webhook', function(request, response) {
 		  "speech": "Testing...",
 		  "displayText": weatherDetails,
 		  "data": "Test Data",
-		  "contextOut": "Test Context Output",
+		  "contextOut": ["Test Context Output"],
 		  "source": "openweathermap"
 		  }
 	  	  //////////////// Preparing output JSON : END /////////////////

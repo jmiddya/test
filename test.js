@@ -73,9 +73,10 @@ app.post('/webhook', function(request, response) {
   var location = request.body.result.parameters.city;
   //console.log(request.body);	
   console.log(location);
-  response.send(location); 	
-  /*getWeather(location).then(weatherJson => {
-		  var weatherDetails = '';
+  //response.send(location); 	
+  getWeather(location).then(weatherJson => {
+	  	  response.send(weatherJson);
+		  /*var weatherDetails = '';
 		  	
 		  var temp = weatherJson.main.temp - 273.15;
 		  weatherDetails = weatherDetails + 'Current temperature : ' + temp + ' C';
@@ -91,9 +92,8 @@ app.post('/webhook', function(request, response) {
 			
 		  weatherDetails = weatherDetails + ' in ' + location;
     
-		  //response.send(weatherDetails);
-	  	  response.send(location); 	
-      })*/
+		  response.send(weatherDetails);*/
+      })
 })
 
 //////////JM : END//////////

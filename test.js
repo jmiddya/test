@@ -72,7 +72,7 @@ app.get('/webhook', function(request, response) {
 
 app.post('/webhook', function(request, response) {
   //var location = request.query.q;
-  var location = request.body.city;
+  var location = request.body.result.parameters.city;
   console.log(request.body);	
   console.log(location);
   getWeather(location).then(weatherJson => {

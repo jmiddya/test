@@ -45,9 +45,8 @@ try {
 }
 
 app.get('/webhook', function(request, response) {
-  //var location = request.query.q;
   var location = request.query.city;
-  console.log(request.query);	
+  //console.log(request.query);	
   console.log(location);
   getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';
@@ -71,9 +70,8 @@ app.get('/webhook', function(request, response) {
 })
 
 app.post('/webhook', function(request, response) {
-  //var location = request.query.q;
   var location = request.body.result.parameters.city;
-  console.log(request.body);	
+  //console.log(request.body);	
   console.log(location);
   getWeather(location).then(weatherJson => {
 		  var weatherDetails = '';
@@ -92,7 +90,8 @@ app.post('/webhook', function(request, response) {
 			
 		  weatherDetails = weatherDetails + ' in ' + location;
     
-		  response.send(weatherDetails);
+		  //response.send(weatherDetails);
+	  	  response.send(temp); 	
       })
 })
 

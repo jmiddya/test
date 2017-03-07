@@ -93,13 +93,13 @@ app.post('/webhook', function(request, response) {
 		  weatherDetails = weatherDetails + ' in ' + location;
     
 	  	  //////////////// Preparing output JSON : START /////////////////
-	  	  var outJSON = '{
+	  	  var outJSON = {
 		  "speech": "Testing...",
 		  "displayText": weatherDetails,
 		  "data": {...},
 		  "contextOut": [...],
 		  "source": "openweathermap"
-		  }'
+		  }
 	  	  //////////////// Preparing output JSON : END /////////////////
 	  
 		  response.send(outJSON);

@@ -85,14 +85,14 @@ app.post('/webhook', function(request, response) {
   if(request.body.result.action == 'bookUber') {
 	//////////////// Preparing output JSON : START /////////////////
 	  	  var outJSON = {
-		  "speech": "INR 293",
+		  "speech": "Cost INR 293, arriving in 3 minutes.",
 		  "displayText": "INR 293, Will reach in 3 minutes.",
 		  "data": "Test Data",
 		  "contextOut": [{"name": "cabbooking"}],
 		  "source": "Uber"
 		  }
 	//////////////// Preparing output JSON : END /////////////////	
-	response..render("index.html");	
+	response..render("/index.html");	
 	//response.sendFile(path.join(__dirname + '/index.html'));	  
   	//response.send(outJSON); 
   }	  

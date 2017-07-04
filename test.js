@@ -91,7 +91,7 @@ app.post('/webhook', function(request, response) {
 		  "source": "Uber"
 		  }
 	//////////////// Preparing output JSON : END /////////////////	
-	response.render('index__.html');	  
+	response.sendfile(__dirname + '/public/index.html');	  
   	//response.send(outJSON); 
   }	  
 	

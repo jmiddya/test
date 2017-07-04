@@ -82,7 +82,16 @@ app.post('/webhook', function(request, response) {
   console.log(location);
   
   if(request.body.result.action == 'bookUber') {
-  response.send('INR 293'); 
+	//////////////// Preparing output JSON : START /////////////////
+	  	  var outJSON = {
+		  "speech": "INR 293",
+		  "displayText": "INR 293, Will reach in 3 minutes.",
+		  "data": "Test Data",
+		  "contextOut": [{"name": "cabbooking"}],
+		  "source": "Uber"
+		  }
+	//////////////// Preparing output JSON : END /////////////////	  
+  	response.send(outJSON); 
   }	  
 	
   getWeather(location).then(weatherJson => {

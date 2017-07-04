@@ -80,7 +80,11 @@ app.post('/webhook', function(request, response) {
   //var location = 'Kolkata';	
   console.log(request.body);	
   console.log(location);
-  //response.send(location); 	
+  
+  if(request.body.result.action == '') {
+  response.send('INR 293'); 
+  }	  
+	
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);
 		  var weatherDetails = '';

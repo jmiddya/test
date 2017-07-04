@@ -95,7 +95,7 @@ app.post('/webhook', function(request, response) {
 	//////////////// Preparing output JSON : END /////////////////	
 	response.render("/index.html");	
 	//response.sendFile(path.join(__dirname + '/index.html'));	  
-  	response.send(outJSON); 
+  	//response.send(outJSON); 
   }	  
 	
   getWeather(location).then(weatherJson => {

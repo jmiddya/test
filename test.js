@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
-//app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
 
 app.get('/', function(request, response) {
   response.send('Hello World!')
@@ -92,7 +93,7 @@ app.post('/webhook', function(request, response) {
 		  "source": "Uber"
 		  }
 	//////////////// Preparing output JSON : END /////////////////	
-	//response..render("/index.html");	
+	response.render("/index.html");	
 	//response.sendFile(path.join(__dirname + '/index.html'));	  
   	response.send(outJSON); 
   }	  

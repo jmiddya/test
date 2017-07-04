@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express();
+var path = require('path');
 
 var config = require('config');
 
@@ -91,7 +92,8 @@ app.post('/webhook', function(request, response) {
 		  "source": "Uber"
 		  }
 	//////////////// Preparing output JSON : END /////////////////	
-	response.sendfile(__dirname + '/public/index.html');	  
+	response.sendfile(__dirname + '/index.html');	
+	//response.sendFile(path.join(__dirname + '/index.html'));	  
   	//response.send(outJSON); 
   }	  
 	

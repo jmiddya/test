@@ -81,7 +81,7 @@ app.post('/webhook', function(request, response) {
   console.log(request.body);	
   console.log(location);
   
-  if(request.body.result.action == '') {
+  if(request.body.result.action == 'bookUber') {
   response.send('INR 293'); 
   }	  
 	

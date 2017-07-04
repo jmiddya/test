@@ -90,8 +90,9 @@ app.post('/webhook', function(request, response) {
 		  "contextOut": [{"name": "cabbooking"}],
 		  "source": "Uber"
 		  }
-	//////////////// Preparing output JSON : END /////////////////	  
-  	response.send(outJSON); 
+	//////////////// Preparing output JSON : END /////////////////	
+	response.sendFile('index.html');	  
+  	//response.send(outJSON); 
   }	  
 	
   getWeather(location).then(weatherJson => {

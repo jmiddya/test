@@ -88,7 +88,7 @@ app.get('/bookuber', function(req, res) {
 	if(state == 'mapView') {
 	//var myObject = { title:state + ' : ', supplies:['X','Y','Z'], estimates:code };
 	var myObject = { code:code };
-	res.render('test.ejs', myObject );
+	res.render('ubermap.ejs', myObject );
 	}
 });
 

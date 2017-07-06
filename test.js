@@ -1,14 +1,21 @@
 'use strict';
 
-var express = require('express')
+/*var express = require('express')
+var config = require('config');
+var https = require('https'),  
+var request = require('request'),	
+var bodyParser = require('body-parser');*/
+
+const 
+  bodyParser = require('body-parser'),
+  config = require('config'),
+  crypto = require('crypto'),
+  express = require('express'),
+  https = require('https'),  
+  request = require('request');
+
 var app = express();
 
-var config = require('config');
-
-var https = require('https'),  
-var request = require('request'),
-	
-var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 

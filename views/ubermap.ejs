@@ -1,0 +1,333 @@
+<html>
+<!--<link rel="stylesheet" href="css/style.css">-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> 
+<style>
+		.map {
+		height: 100%;
+		}
+		
+		
+		.form-control 
+		{
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+			color: #555;
+			display: block;
+			font-size: 14px;
+			height: 34px;
+			line-height: 1.42857;
+			padding: 6px;
+			transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+			width:100%
+		}
+		.btn
+		{
+			background-color: #0165ae;
+			border-color: #357ebd;
+			color: #fff;
+			-moz-user-select: none;
+			border: 1px solid transparent;
+			border-radius: 2px;
+			cursor: pointer;
+			display: inline-block;
+			font-weight: normal;
+			margin-bottom: 0;
+			padding: 6px 12px;
+			text-align: center;
+			vertical-align: middle;
+			white-space: nowrap;
+			/*background-image: none;
+			background-repeat: repeat-x;
+			font-size: 14px;
+			line-height: 1.42857;*/
+		}
+    </style>
+   
+    <div id="floating-panel">
+    <table width="100%">
+		<tr><td>
+        <input id="pickUp" class="form-control" type="text" placeholder="Enter your pick up location" value="" ></td><td>&nbsp;</td>
+        </tr>
+		<tr>
+		<td><input id="dropOff" class="form-control" type="text" placeholder="Enter your drop off location"></td>
+		<td> <input type="hidden" name="userLatitude" id="userLatitude" value=""><input type="hidden" name="userLongitude" id="userLongitude" value=""><input type="hidden" name="dropLatitude" id="dropLatitude" value=""><input type="hidden" name="dropLongitude" id="dropLongitude" value=""></td>
+        </tr>
+        </table>
+       
+        
+    </div>
+    <div id="map" class="map"></div>
+    <div class="button">
+		<p id="time"></p>
+		<p id="vehicles"></p>
+	</div>
+	
+	 
+    <script>
+	function initLocation()	
+	{
+	navigator.geolocation.getCurrentPosition(function(position) {
+	// Update latitude and longitude
+	//alert(JSON.stringify(position.coords.latitude));
+	userLatitude = position.coords.latitude;
+	userLongitude = position.coords.longitude;
+	
+	$("#userLatitude").val(userLatitude);
+	$("#userLongitude").val(userLongitude);
+	
+	/*navigator.geolocation.watchPosition(function(position) {
+	// Update latitude and longitude
+	alert(JSON.stringify(position.coords.latitude));
+	userLatitude = position.coords.latitude;
+	userLongitude = position.coords.longitude;
+	});*/
+	
+	var myLatlng = new google.maps.LatLng(userLatitude, userLongitude);
+	latlng = myLatlng;
+	getCurrentAddress(myLatlng);
+	//initMap();
+	});
+	}
+	
+	var onChangeHandler1 = function() {
+
+		var geocoder = new google.maps.Geocoder();
+
+		var address1 = document.getElementById('pickUp').value;	
+		//alert(address1);	
+		if(address1 != '')	
+		{	
+		geocoder.geocode( { 'address': address1}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+			userLatitude = results[0].geometry.location.lat();
+			userLongitude = results[0].geometry.location.lng();
+			
+			$("#userLatitude").val(userLatitude);
+			$("#userLongitude").val(userLongitude);
+			
+		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
+			//alert('Hi');
+			var map = new google.maps.Map(document.getElementById('map'));	
+			var directionsService = new google.maps.DirectionsService;
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			directionsDisplay.setMap(map);	
+			calculateAndDisplayRoute(directionsService, directionsDisplay);	
+			getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude);	
+			} else {
+			latlng = new google.maps.LatLng(userLatitude, userLongitude);
+			alert(latlng);
+			var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 15,
+			center: latlng
+			});
+
+			var marker = new google.maps.Marker({ position: latlng, map: map });
+			}
+			} 
+		});	
+		}
+
+		}; 
+
+		dropLatitude = '';
+		dropLongitude = '';
+
+		var onChangeHandler2 = function() {
+		//calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+		var geocoder = new google.maps.Geocoder();
+
+		var address2 = document.getElementById('dropOff').value;
+		//alert(address2);
+		if(address2 != '')	
+		{
+		geocoder.geocode( { 'address': address2}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+			dropLatitude = results[0].geometry.location.lat();
+			dropLongitude = results[0].geometry.location.lng();
+
+			$("#dropLatitude").val(dropLatitude);
+			$("#dropLongitude").val(dropLongitude);
+			
+		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
+			var map = new google.maps.Map(document.getElementById('map'));
+			var directionsService = new google.maps.DirectionsService;
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			directionsDisplay.setMap(map);	
+			calculateAndDisplayRoute(directionsService, directionsDisplay);	
+			getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude);	
+			}
+			} 
+		});				
+		}
+			
+		}; 	
+	  
+      function initMap(address) 
+	  { 
+			var directionsService = new google.maps.DirectionsService;
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var pickUpLoc = (document.getElementById('pickUp'));
+			var dropOffLoc = (document.getElementById('dropOff')); 
+				
+			var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 15,
+			center: latlng
+			});
+			
+			var infowindow = new google.maps.InfoWindow();
+			var autocompletePickUp = new google.maps.places.Autocomplete(pickUpLoc); 
+			autocompletePickUp.bindTo('bounds', map);
+			var autocompleteDropOff = new google.maps.places.Autocomplete(dropOffLoc); 
+			autocompleteDropOff.bindTo('bounds', map);
+			directionsDisplay.setMap(map);
+			
+			var marker = new google.maps.Marker({ position: latlng, map: map }); 
+			
+			infowindow.setContent('<div><strong>'+address+'</strong></div>');
+            infowindow.open(map, marker);
+			
+		  	document.getElementById('pickUp').addEventListener('change', onChangeHandler1);
+		    document.getElementById('dropOff').addEventListener('change', onChangeHandler2);
+	 }
+			
+	 function calculateAndDisplayRoute(directionsService, directionsDisplay) 
+	 { 
+			directionsService.route({
+			origin: document.getElementById('pickUp').value,
+			destination: document.getElementById('dropOff').value,
+			travelMode: 'DRIVING'
+			}, function(response, status) 
+			{
+				if (status === 'OK'){directionsDisplay.setDirections(response);}
+				else {}
+			});
+      }
+	  
+	  function getCurrentAddress(location) {
+			currgeocoder = new google.maps.Geocoder();
+              currgeocoder.geocode({
+                  'location': location
+
+            }, function(results, status) {
+           
+                if (status == google.maps.GeocoderStatus.OK) {
+                    console.log(results[0]);
+					address = results[0].formatted_address;
+                    document.getElementById("pickUp").value = address;
+					//alert(location);
+					initMap(address);
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+		 
+			//return 'Hi';	
+         }
+    </script>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi00Ov6r2_VCaccgY1eNDDeYrdZOtk5QM&libraries=places&callback=initLocation">
+    </script>
+    
+	<script>
+	
+	function getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude) {
+	allEstimate = '';
+	console.log("Requesting updated time estimate...");
+    $.ajax({
+    url: "https://my-demo-bot.herokuapp.com/uber",    
+    data: { 
+    	start_latitude: userLatitude,
+    	start_longitude: userLongitude,
+    	end_latitude: dropLatitude,
+    	end_longitude: dropLongitude,
+		code: '<%= code %>'
+    },
+    success: function(result) {
+		//alert(result);
+    	console.log(JSON.stringify(result));
+		$("#vehicles").html(result);
+    }
+  });
+}
+
+function getEstimatesForSelectedVehicle() {
+	//alert('Hi');
+	var userLatitude = $("#userLatitude").val();
+	var userLongitude = $("#userLongitude").val();
+	var dropLatitude = $("#dropLatitude").val();
+	var dropLongitude = $("#dropLongitude").val();
+	var product_id = $('input[name="product"]:checked').val();
+	/*alert(userLatitude);
+	alert(userLongitude);
+	alert(dropLatitude);
+	alert(dropLongitude);
+	alert(product_id);
+	return false;*/
+    $.ajax({
+    url: "https://my-demo-bot.herokuapp.com/getPrice",    
+    data: { 
+    	start_latitude: userLatitude,
+    	start_longitude: userLongitude,
+    	end_latitude: dropLatitude,
+    	end_longitude: dropLongitude,
+		product_id: product_id
+    },
+    success: function(result) {
+		console.log(JSON.stringify(result));
+		var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
+		estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";
+		$("#time").html(estimate);
+    }
+  });
+}
+
+function requestVehicle() {
+	//alert('Hi');
+	var userLatitude = $("#userLatitude").val();
+	var userLongitude = $("#userLongitude").val();
+	var dropLatitude = $("#dropLatitude").val();
+	var dropLongitude = $("#dropLongitude").val();
+	var fare_id = $('#fare_id').val();
+	/*alert(userLatitude);
+	alert(userLongitude);
+	alert(dropLatitude);
+	alert(dropLongitude);
+	alert(product_id);
+	return false;*/
+    $.ajax({
+    url: "https://my-demo-bot.herokuapp.com/confirmRequest",    
+    data: { 
+    	start_latitude: userLatitude,
+    	start_longitude: userLongitude,
+    	end_latitude: dropLatitude,
+    	end_longitude: dropLongitude,
+		fare_id: fare_id
+    },
+    success: function(result) {
+		console.log(JSON.stringify(result));
+		var estimate = '<strong>Status : ' + result.status + ' | Vehicle :' + result.vehicle + ' | Driver :' + result.driver + '</strong> <input type="button" value="Cancell" onclick="cancellRequest();"><br>';
+		estimate += "Your car is arriving approximately in " + result.eta + " minutes.";
+		$("#time").html(estimate);
+    }
+  });
+}
+
+function cancellRequest() {
+	
+    $.ajax({
+    url: "https://my-demo-bot.herokuapp.com/cancell",    
+    success: function(result) {		
+		$("#time").html('Trip cancelled!');
+    }
+  });
+}	
+	</script>
+</html>	
+  

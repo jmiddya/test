@@ -89,7 +89,6 @@ app.post('/webhook', function(request, response) {
 		  "speech": "Price INR 293, arriving in 3 minutes.",
 		  "displayText": "INR 293, Will reach in 3 minutes.",
 		  "data": {
-		  	   {
 			  "facebook": {
 			    "attachment": {
 			      "type": "template",
@@ -106,8 +105,7 @@ app.post('/webhook', function(request, response) {
 				]
 			      }
 			    }
-			  }
-			}	
+			  }	
 		  },
 		  "contextOut": [{"name": "cabbooking"}],
 		  "source": "Uber"

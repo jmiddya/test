@@ -86,9 +86,29 @@ app.post('/webhook', function(request, response) {
   if(request.body.result.action == 'bookUber') {
 	//////////////// Preparing output JSON : START /////////////////
 	  	  var outJSON = {
-		  "speech": "Cost INR 293, arriving in 3 minutes.",
+		  "speech": "Price INR 293, arriving in 3 minutes.",
 		  "displayText": "INR 293, Will reach in 3 minutes.",
-		  "data": "Test Data",
+		  "data": {
+		  	   {
+			  "facebook": {
+			    "attachment": {
+			      "type": "template",
+			      "payload": {
+				"template_type": "button",
+				"text": "{bookUber}",
+				"buttons": [
+				  {
+				    "type": "web_url",
+				    "url": "https://my-demo-bot.herokuapp.com/index__.html",
+				    "title": "Book Uber!",
+				    "webview_height_ratio": "tall"
+				  }
+				]
+			      }
+			    }
+			  }
+			}	
+		  },
 		  "contextOut": [{"name": "cabbooking"}],
 		  "source": "Uber"
 		  }

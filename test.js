@@ -95,12 +95,12 @@ app.post('/webhook', function(request, response) {
 			      "payload": {
 				"template_type": "button",
 				"text": "Book My Uber!",
+				"subtitle": "Currently I am facilitating only booking of Uber cab. Gradually I'll facilitate other services as well.",      
 				"buttons": [
 				  {
 				    "type": "web_url",
 				    "url": "https://google.com",
-				    "title": "Go",
-				    "subtitle": "Currently I am facilitating only booking of Uber cab. Gradually I'll facilitate other services as well.",	  
+				    "title": "Go",	  
 				    "webview_height_ratio": "tall"
 				  }
 				]

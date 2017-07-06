@@ -1,8 +1,13 @@
+'use strict';
+
 var express = require('express')
 var app = express();
 
 var config = require('config');
 
+var https = require('https'),  
+var request = require('request'),
+	
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -10,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 //app.set('view engine', 'html');
-app.engine('html', require('ejs').renderFile);
+//app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 global.access_token = '';

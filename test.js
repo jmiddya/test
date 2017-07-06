@@ -9,8 +9,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
-app.set('view engine', 'html');
+//app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
+global.access_token = '';
 
 app.get('/', function(request, response) {
   response.send('Hello World!')

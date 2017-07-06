@@ -94,8 +94,7 @@ app.post('/webhook', function(request, response) {
 			      "type": "template",
 			      "payload": {
 				"template_type": "button",
-				"text": "Book My Uber!",
-				"subtitle": "Currently I am facilitating only booking of Uber cab. Gradually I'll facilitate other services as well.",      
+				"text": "Book My Uber!",      
 				"buttons": [
 				  {
 				    "type": "web_url",

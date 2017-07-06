@@ -94,12 +94,13 @@ app.post('/webhook', function(request, response) {
 			      "type": "template",
 			      "payload": {
 				"template_type": "button",
-				"text": "{bookUber}",
+				"text": "Book My Uber!",
 				"buttons": [
 				  {
 				    "type": "web_url",
-				    "url": "https://my-demo-bot.herokuapp.com/index__.html",
-				    "title": "Book Uber!",
+				    "url": "https://google.com",
+				    "title": "Go",
+				    "subtitle": "Currently I am facilitating only booking of Uber cab. Gradually I'll facilitate other services as well.",	  
 				    "webview_height_ratio": "tall"
 				  }
 				]

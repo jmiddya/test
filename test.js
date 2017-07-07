@@ -122,6 +122,151 @@ app.get('/bookuber', function(req, res) {
 	res.render('ubermap.ejs', myObject );
 	}
 });
+
+var getEstimatesForUserLocation = function(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, estimates) {
+	let parsedData = '';
+	console.log("Requesting updated time estimate...");
+	
+	console.log(access_token);
+	console.log(userLatitude);
+	console.log(userLongitude);
+	console.log(dropLatitude);
+	console.log(dropLongitude);
+	
+	var qs = require("querystring");
+	//var http = require("https");
+
+	///////////////////// For Products : START //////////////////////
+	var options = {
+	  "method": "GET",
+	  "hostname": "sandbox-api.uber.com",
+	  //"port": null,
+	  "path": '/v1.2/products?latitude='+userLatitude+'&longitude='+userLongitude,
+	  "headers": {
+		'Authorization': "Bearer " + access_token,
+		'Accept-Language': "en_US",
+		'content-type': "application/json",
+	  }
+	};
+
+	var req = https.request(options, function (res) {
+	  	
+	  var chunks = [];
+
+	  res.on("data", function (chunk) {
+		//console.log('chunk'+chunk);  
+		chunks.push(chunk);
+	  });
+
+	  res.on("end", function () {
+		var body = Buffer.concat(chunks);
+		var json = JSON.parse(body);
+		//var json = JSON.stringify(body);
+		console.log('Products'+chunks);
+		global.Products = json;
+		if(json) global.Product_id = json["products"][0]["product_id"];
+		parsedData = json;
+		estimates(json);
+		//console.log('Products'+Products);
+		//console.log(Product_id);	
+		
+	  });
+	});
+
+	req.end();
+	///////////////////// For Products : END //////////////////////	
+
+//return parsedData;  
+}
+
+app.get('/uber', function(req, res) {
+var productList = '';	
+var allEstimate = '';
+
+var userLatitude = req.query.start_latitude;
+var userLongitude = req.query.start_longitude;
+var dropLatitude = req.query.end_latitude;
+var dropLongitude = req.query.end_longitude;
+var code = req.query.code;
+
+console.log(code);
+
+//////////////// Added to get Access Token using Authorization code : START //////////////////
+
+var qs = require("querystring");
+//var http = require("https");
+
+var options = {
+  "method": "POST",
+  "hostname": "login.uber.com",
+  //"port": null,
+  "path": "/oauth/v2/token",
+  "headers": {
+    "content-type": "application/x-www-form-urlencoded"
+  }
+};
+
+var req2 = https.request(options, function (res2) {
+  var chunks = [];
+
+  res2.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res2.on("end", function () {
+    var body = Buffer.concat(chunks);
+	var json = JSON.parse(body);
+	console.log("access_token1"+access_token);
+	if(access_token == '') access_token = json.access_token;
+	console.log("access_token2"+access_token);
+
+	///////////// Added to get Estimatiion : START /////////////
+	productList = getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, function (estimates)
+	{
+		console.log('Called : '+estimates);
+		//var allEstimate = '';
+		var data = estimates["products"]; 
+			//console.log(data);
+			if (typeof data != typeof undefined) {
+				// Sort Uber products by time to the user's location 
+				/*data.sort(function(t0, t1) {
+					return t0.duration - t1.duration;
+				});*/
+
+				data.forEach(displayProducts);
+				//console.log("Updating time estimate...");
+				var checked = '';
+				function displayProducts(item, index) {
+					if(index == 0) {
+						checked = 'checked';
+					} else {
+						checked = '';
+					}	
+					allEstimate += '<input type="radio" name="product" value="' + item.product_id + '" ' + checked + '>' + item.display_name + " " + '<img src="' + item.image + '" alt="' + item.display_name + '" width="40" > '; 
+					//alert(allEstimate);
+				}
+							
+			}
+		
+		console.log(allEstimate);
+		res.send(allEstimate+'<input type="button" name="estimate" id="estimate" value="Get Estimate" onclick="getEstimatesForSelectedVehicle();" >');	
+	});
+	///////////// Added to get Estimatiion : END ///////////////  
+	
+  });
+});
+
+req2.write(qs.stringify({ code: code,
+  client_id: 'q5XFNcuI0FffOKwN79Im1WStCTJPeY-d',
+  client_secret: 'hBPm-ocnBDS23XSc6B1zLwjKLcJPYYnm5oKMH8_u',
+  redirect_uri: 'https://my-demo-bot.herokuapp.com/bookuber',
+  grant_type: 'authorization_code' }));
+
+req2.end();	
+	
+///////////////// Added to get Access Token using Authorization code : END ////////////////
+});
+
 //////////JM : END//////////
 
 app.listen(app.get('port'), function() {

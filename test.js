@@ -124,7 +124,7 @@ app.get('/bookuber', function(req, res) {
 });
 
 var getEstimatesForUserLocation = function(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, estimates) {
-	let parsedData = '';
+	var parsedData = '';
 	console.log("Requesting updated time estimate...");
 	
 	console.log(access_token);

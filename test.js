@@ -269,6 +269,144 @@ req2.end();
 ///////////////// Added to get Access Token using Authorization code : END ////////////////
 });
 
+app.get('/getPrice', function(req, res) {
+	var userLatitude = req.query.start_latitude;
+	var userLongitude = req.query.start_longitude;
+	var dropLatitude = req.query.end_latitude;
+	var dropLongitude = req.query.end_longitude;
+	var product_id = req.query.product_id;
+
+	console.log("getPrice of "+product_id);
+	
+	var options = {
+	  "method": "POST",
+	  "hostname": "sandbox-api.uber.com",
+	  "path": '/v1.2/requests/estimate',
+	  "headers": {
+		'Authorization': "Bearer " + access_token,
+		'Accept-Language': "en_US",
+		'Content-Type': "application/json"
+	  }
+	};
+
+	var req3 = https.request(options, function (res2) {
+	  console.log("res"+res2);	
+	  var chunks = [];
+
+	  res2.on("data", function (chunk) {
+		//console.log('chunk'+JSON.stringify(chunk));  
+		chunks.push(chunk);
+	  });
+
+	  res2.on("end", function () {
+		var body = Buffer.concat(chunks);
+		var json = JSON.parse(body);
+		console.log('Fair_ID : '+json["fare"]["fare_id"]);	
+		res.send(json);
+		//console.log(body);
+		//console.log(body.toString());
+		//console.log(json);
+		//console.log(json.toString());
+		
+	  });
+	});
+
+	req3.write(JSON.stringify({
+	  product_id: Product_id,	
+	  start_latitude: userLatitude,
+	  start_longitude: userLongitude,
+	  end_latitude: dropLatitude,
+	  end_longitude: dropLongitude }));
+	  
+	req3.end();
+});
+
+app.get('/confirmRequest', function(req, res) {
+	var userLatitude = req.query.start_latitude;
+	var userLongitude = req.query.start_longitude;
+	var dropLatitude = req.query.end_latitude;
+	var dropLongitude = req.query.end_longitude;
+	var fare_id = req.query.fare_id;
+
+	console.log("Request of "+fare_id);
+	
+	var options = {
+	  "method": "POST",
+	  "hostname": "sandbox-api.uber.com",
+	  "path": '/v1.2/requests',
+	  "headers": {
+		'Authorization': "Bearer " + access_token,
+		'Accept-Language': "en_US",
+		'Content-Type': "application/json"
+	  }
+	};
+
+	var req3 = https.request(options, function (res2) {
+	  console.log("res"+res2);	
+	  var chunks = [];
+
+	  res2.on("data", function (chunk) {
+		//console.log('chunk'+JSON.stringify(chunk));  
+		chunks.push(chunk);
+	  });
+
+	  res2.on("end", function () {
+		var body = Buffer.concat(chunks);
+		var json = JSON.parse(body);
+		//console.log('Fair_ID : '+json["fare"]["fare_id"]);	
+		res.send(json);
+		//console.log(body);
+		//console.log(body.toString());
+		//console.log(json);
+		//console.log(json.toString());
+		
+	  });
+	});
+
+	req3.write(JSON.stringify({
+	  fare_id: fare_id,	
+	  start_latitude: userLatitude,
+	  start_longitude: userLongitude,
+	  end_latitude: dropLatitude,
+	  end_longitude: dropLongitude }));
+	  
+	req3.end();
+});
+
+app.get('/surge_confirmation', function(req, res) {
+	console.log(res);
+});
+
+app.get('/cancell', function(req, res) {
+	var options = {
+			  "method": "DELETE",
+			  "hostname": "sandbox-api.uber.com",
+			  "path": '/v1.2/requests/current',
+			  "headers": {
+				'Authorization': "Bearer " + access_token,
+				'Accept-Language': "en_US",
+				'Content-Type': "application/json"
+			  }
+			};
+
+			var req = https.request(options, function (res2) {
+			  console.log("res3"+res);	
+			  var chunks = [];
+
+			  res2.on("data", function (chunk) {
+				//console.log('chunk'+JSON.stringify(chunk));  
+				chunks.push(chunk);
+			  });
+
+			  res2.on("end", function () {
+			  console.log('Cancelled');
+			  res.send('Cancelled');
+			  });
+			});
+
+			req.end();
+});
+
 //////////JM : END//////////
 
 app.listen(app.get('port'), function() {

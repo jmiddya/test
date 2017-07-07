@@ -1,18 +1,18 @@
 'use strict';
 
-/*var express = require('express')
+var express = require('express')
 var config = require('config');
 var https = require('https'),  
 var request = require('request'),	
-var bodyParser = require('body-parser');*/
+var bodyParser = require('body-parser');
 
-const 
+/*const 
   bodyParser = require('body-parser'),
   config = require('config'),
   crypto = require('crypto'),
   express = require('express'),
   https = require('https'),  
-  request = require('request');
+  request = require('request');*/
 
 var app = express();
 

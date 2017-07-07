@@ -80,8 +80,8 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', function(request, response) {
   var location = request.body.result.parameters.city;
   //var location = 'Kolkata';	
-  console.log(request.body);	
-  console.log(location);
+  //console.log(request.body);	
+  //console.log(location);
   //response.send(location); 	
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);
@@ -127,13 +127,13 @@ app.get('/bookuber', function(req, res) {
 
 var getEstimatesForUserLocation = function(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, estimates) {
 	var parsedData = '';
-	console.log("Requesting updated time estimate...");
+	//console.log("Requesting updated time estimate...");
 	
-	console.log(access_token);
-	console.log(userLatitude);
-	console.log(userLongitude);
-	console.log(dropLatitude);
-	console.log(dropLongitude);
+	//console.log(access_token);
+	//console.log(userLatitude);
+	//console.log(userLongitude);
+	//console.log(dropLatitude);
+	//console.log(dropLongitude);
 	
 	var qs = require("querystring");
 	//var http = require("https");
@@ -225,7 +225,7 @@ var req2 = https.request(options, function (res2) {
 	///////////// Added to get Estimatiion : START /////////////
 	productList = getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, function (estimates)
 	{
-		console.log('Called : '+estimates);
+		//console.log('Called : '+estimates);
 		//var allEstimate = '';
 		var data = estimates["products"]; 
 			//console.log(data);
@@ -390,7 +390,7 @@ app.get('/cancell', function(req, res) {
 			};
 
 			var req = https.request(options, function (res2) {
-			  console.log("res3"+res);	
+			  //console.log("res3"+res);	
 			  var chunks = [];
 
 			  res2.on("data", function (chunk) {
@@ -399,7 +399,7 @@ app.get('/cancell', function(req, res) {
 			  });
 
 			  res2.on("end", function () {
-			  console.log('Cancelled');
+			  //console.log('Cancelled');
 			  res.send('Cancelled');
 			  });
 			});

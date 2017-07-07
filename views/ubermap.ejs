@@ -281,9 +281,9 @@ function getEstimatesForSelectedVehicle() {
     },
     success: function(result) {
 		//console.log(JSON.stringify(result));
-		var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
-		estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";
-		$("#time").html(estimate);
+		/*var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
+		estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";*/
+		$("#time").html('<h1>INR 500</h1>');
     }
   });
 }

@@ -164,7 +164,7 @@ var getEstimatesForUserLocation = function(userLatitude, userLongitude, dropLati
 		var body = Buffer.concat(chunks);
 		var json = JSON.parse(body);
 		//var json = JSON.stringify(body);
-		console.log('Products'+chunks);
+		//console.log('Products'+chunks);
 		global.Products = json;
 		if(json) global.Product_id = json["products"][0]["product_id"];
 		parsedData = json;
@@ -191,7 +191,7 @@ var dropLatitude = req.query.end_latitude;
 var dropLongitude = req.query.end_longitude;
 var code = req.query.code;
 
-console.log(code);
+//console.log(code);
 
 //////////////// Added to get Access Token using Authorization code : START //////////////////
 
@@ -218,9 +218,9 @@ var req2 = https.request(options, function (res2) {
   res2.on("end", function () {
     var body = Buffer.concat(chunks);
 	var json = JSON.parse(body);
-	console.log("access_token1"+access_token);
+	//console.log("access_token1"+access_token);
 	if(access_token == '') access_token = json.access_token;
-	console.log("access_token2"+access_token);
+	//console.log("access_token2"+access_token);
 
 	///////////// Added to get Estimatiion : START /////////////
 	productList = getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude, access_token, function (estimates)
@@ -250,7 +250,7 @@ var req2 = https.request(options, function (res2) {
 							
 			}
 		
-		console.log(allEstimate);
+		//console.log(allEstimate);
 		res.send(allEstimate+'<input type="button" name="estimate" id="estimate" value="Get Estimate" onclick="getEstimatesForSelectedVehicle();" >');	
 	});
 	///////////// Added to get Estimatiion : END ///////////////  
@@ -276,7 +276,7 @@ app.get('/getPrice', function(req, res) {
 	var dropLongitude = req.query.end_longitude;
 	var product_id = req.query.product_id;
 
-	console.log("getPrice of "+product_id);
+	//console.log("getPrice of "+product_id);
 	
 	var options = {
 	  "method": "POST",
@@ -290,7 +290,7 @@ app.get('/getPrice', function(req, res) {
 	};
 
 	var req3 = https.request(options, function (res2) {
-	  console.log("res"+res2);	
+	  //console.log("res"+res2);	
 	  var chunks = [];
 
 	  res2.on("data", function (chunk) {
@@ -301,7 +301,7 @@ app.get('/getPrice', function(req, res) {
 	  res2.on("end", function () {
 		var body = Buffer.concat(chunks);
 		var json = JSON.parse(body);
-		console.log('Fair_ID : '+json["fare"]["fare_id"]);	
+		//console.log('Fair_ID : '+json["fare"]["fare_id"]);	
 		res.send(json);
 		//console.log(body);
 		//console.log(body.toString());
@@ -328,7 +328,7 @@ app.get('/confirmRequest', function(req, res) {
 	var dropLongitude = req.query.end_longitude;
 	var fare_id = req.query.fare_id;
 
-	console.log("Request of "+fare_id);
+	//console.log("Request of "+fare_id);
 	
 	var options = {
 	  "method": "POST",
@@ -342,7 +342,7 @@ app.get('/confirmRequest', function(req, res) {
 	};
 
 	var req3 = https.request(options, function (res2) {
-	  console.log("res"+res2);	
+	  //console.log("res"+res2);	
 	  var chunks = [];
 
 	  res2.on("data", function (chunk) {

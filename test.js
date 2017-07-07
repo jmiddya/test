@@ -23,7 +23,7 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 //app.set('view engine', 'html');
 //app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
 global.access_token = '';
 

@@ -117,7 +117,7 @@ app.post('/webhook', function(request, response) {
   	response.send(outJSON); 
   }
 
-  if(request.body.result.action === 'getWeather') {	
+  //if(request.body.result.action === 'getWeather') {	
   var location = request.body.result.parameters.city;
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);
@@ -148,8 +148,8 @@ app.post('/webhook', function(request, response) {
 	  	  //////////////// Preparing output JSON : END /////////////////
 	  
 		  response.send(outJSON);
-      });
-   }	
+      })
+   //}	
 })
 
 //////////JM : END//////////

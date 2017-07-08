@@ -87,8 +87,7 @@ app.post('/webhook', function(request, response) {
 			    "attachment": {
 			      "type": "template",
 			      "payload": {
-				"template_type": "button",				
-				"title": "Book Uber Cab",	
+				"template_type": "button",	
 				"text": "Should I book an Uber cab for you?",	
 				"buttons": [
 				  {

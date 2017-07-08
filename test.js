@@ -76,11 +76,41 @@ app.get('/webhook', (req, res) => {
 
 
 app.post('/webhook', function(request, response) {
+ 	
+  if(request.body.result.action == 'bookUber') {
+	//////////////// Preparing output JSON : START /////////////////
+	  	  var outJSON = {
+		  "speech": "Price INR 293, arriving in 3 minutes.",
+		  "displayText": "INR 293, Will reach in 3 minutes.",
+		  "data": {
+			  "facebook": {
+			    "attachment": {
+			      "type": "template",
+			      "payload": {
+				"template_type": "button",
+				"text": "Book My Uber!",      
+				"buttons": [
+				  {
+				    "type": "web_url",
+				    "url": "https://google.com",
+				    "title": "Go",	  
+				    "webview_height_ratio": "tall"
+				  }
+				]
+			      }
+			    }
+			  }	
+		  },
+		  "contextOut": [{"name": "cabbooking"}],
+		  "source": "Uber"
+		  }
+	//////////////// Preparing output JSON : END /////////////////	
+	//response.render("/index.html");	
+	//response.sendFile(path.join(__dirname + '/index.html'));	  
+  	response.send(outJSON); 
+  }
+	
   var location = request.body.result.parameters.city;
-  //var location = 'Kolkata';	
-  console.log(request.body);	
-  console.log(location);
-  //response.send(location); 	
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);
 		  var weatherDetails = '';

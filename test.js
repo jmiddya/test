@@ -87,19 +87,16 @@ app.post('/webhook', function(request, response) {
 			    "attachment": {
 			      "type": "template",
 			      "payload": {
-				"template_type": "button",
-				"elements": [
-					{
-					"title": "Test Title",	
-					"buttons": [
-					  {
-					    "type": "web_url",
-					    "url": "https://google.com",
-					    "title": "Go"
-					  }
-					]
-				     }
-				 ]	
+				"template_type": "button",				
+				"title": "Book Uber Cab",	
+				"text": "Should I book an Uber cab for you?",	
+				"buttons": [
+				  {
+				    "type": "web_url",
+				    "url": "https://google.com",
+				    "title": "Go"
+				  }
+				]				    	
 			      }
 			    }
 			  }	

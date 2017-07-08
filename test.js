@@ -88,7 +88,6 @@ app.post('/webhook', function(request, response) {
 			      "type": "template",
 			      "payload": {
 				"template_type": "generic",
-				"text": "Book My Uber!",  
 				"elements": [
 					{
 					"title": "Test Title",
@@ -97,7 +96,8 @@ app.post('/webhook', function(request, response) {
 					  {
 					    "type": "web_url",
 					    "url": "https://google.com",
-					    "title": "Go",	  
+					    "title": "Go",
+					    "text": "Book My Uber!",				    	  
 					    "webview_height_ratio": "tall"
 					  }
 					]

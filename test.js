@@ -87,16 +87,23 @@ app.post('/webhook', function(request, response) {
 			    "attachment": {
 			      "type": "template",
 			      "payload": {
-				"template_type": "button",
-				"text": "Book My Uber!",      
-				"buttons": [
-				  {
-				    "type": "web_url",
-				    "url": "https://google.com",
-				    "title": "Go",	  
-				    "webview_height_ratio": "tall"
-				  }
-				]
+				"template_type": "generic",
+				"text": "Book My Uber!",  
+				"elements": [
+					{
+					"title": "Test Title",
+					"subtitle": "Test Title",
+      					"content": "<h2>Content<h2>",	
+					"buttons": [
+					  {
+					    "type": "web_url",
+					    "url": "https://google.com",
+					    "title": "Go",	  
+					    "webview_height_ratio": "tall"
+					  }
+					]
+				     }
+				 ]	
 			      }
 			    }
 			  }	
@@ -109,7 +116,8 @@ app.post('/webhook', function(request, response) {
 	//response.sendFile(path.join(__dirname + '/index.html'));	  
   	response.send(outJSON); 
   }
-	
+
+  if(request.body.result.action == 'getWeather') {	
   var location = request.body.result.parameters.city;
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);
@@ -140,7 +148,8 @@ app.post('/webhook', function(request, response) {
 	  	  //////////////// Preparing output JSON : END /////////////////
 	  
 		  response.send(outJSON);
-      })
+      });
+   }	
 })
 
 //////////JM : END//////////

@@ -92,8 +92,7 @@ app.post('/webhook', function(request, response) {
 				"elements": [
 					{
 					"title": "Test Title",
-					"subtitle": "Test Title",
-      					"content": "<h2>Content<h2>",	
+					"subtitle": "Test Title",	
 					"buttons": [
 					  {
 					    "type": "web_url",

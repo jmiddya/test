@@ -77,7 +77,7 @@ app.get('/webhook', (req, res) => {
 
 app.post('/webhook', function(request, response) {
  	
-  if(request.body.result.action == 'bookUber') {
+  if(request.body.result.action === 'bookUber') {
 	//////////////// Preparing output JSON : START /////////////////
 	  	  var outJSON = {
 		  "speech": "Price INR 293, arriving in 3 minutes.",
@@ -117,7 +117,7 @@ app.post('/webhook', function(request, response) {
   	response.send(outJSON); 
   }
 
-  if(request.body.result.action == 'getWeather') {	
+  if(request.body.result.action === 'getWeather') {	
   var location = request.body.result.parameters.city;
   getWeather(location).then(weatherJson => {
 	  	  //response.send(weatherJson);

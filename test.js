@@ -97,7 +97,7 @@ app.post('/webhook', function(request, response) {
 					    "type": "web_url",
 					    "url": "https://google.com",
 					    "title": "Go",
-					    "text": "Book My Uber!",				    	  
+					    //"text": "Book My Uber!",				    	  
 					    "webview_height_ratio": "tall"
 					  }
 					]

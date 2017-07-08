@@ -87,7 +87,7 @@ app.post('/webhook', function(request, response) {
 			    "attachment": {
 			      "type": "template",
 			      "payload": {
-				"template_type": "generic",
+				"template_type": "button",
 				"elements": [
 					{
 					"title": "Test Title",	

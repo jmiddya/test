@@ -90,15 +90,12 @@ app.post('/webhook', function(request, response) {
 				"template_type": "generic",
 				"elements": [
 					{
-					"title": "Test Title",
-					"subtitle": "Test Title",	
+					"title": "Test Title",	
 					"buttons": [
 					  {
 					    "type": "web_url",
 					    "url": "https://google.com",
-					    "title": "Go",
-					    //"text": "Book My Uber!",				    	  
-					    "webview_height_ratio": "tall"
+					    "title": "Go"
 					  }
 					]
 				     }

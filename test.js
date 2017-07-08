@@ -76,7 +76,7 @@ app.get('/webhook', (req, res) => {
 
 
 app.post('/webhook', function(request, response) {
- 	
+  console.log(request.body.result.action);	
   if(request.body.result.action === 'bookUber') {
 	//////////////// Preparing output JSON : START /////////////////
 	  	  var outJSON = {
@@ -141,7 +141,7 @@ app.post('/webhook', function(request, response) {
 	  	  var outJSON = {
 		  "speech": weatherDetails,
 		  "displayText": weatherDetails,
-		  "data": "Test Data",
+		  "data": "Test Data "+request.body.result.action,
 		  "contextOut": [{"name": "forecast"}],
 		  "source": "openweathermap"
 		  }

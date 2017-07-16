@@ -259,18 +259,12 @@
 
 $(function(){
     $("#estimate").on('touchstart click', function(){
-	
-	var userLatitude = $("#userLatitude").val();
+	alert('Hi');
+	/*var userLatitude = $("#userLatitude").val();
 	var userLongitude = $("#userLongitude").val();
 	var dropLatitude = $("#dropLatitude").val();
 	var dropLongitude = $("#dropLongitude").val();
 	var product_id = $('input[name="product"]:checked').val();
-	/*alert(userLatitude);
-	alert(userLongitude);
-	alert(dropLatitude);
-	alert(dropLongitude);
-	alert(product_id);
-	return false;*/
     $.ajax({
     url: "https://my-demo-bot.herokuapp.com/getPrice",    
     data: { 
@@ -286,7 +280,7 @@ $(function(){
 		//estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";
 		$("#time").html(result);
     }
-	});
+	});*/
 	
 	});
 });

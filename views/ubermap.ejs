@@ -258,7 +258,37 @@
 }
 
 $(function(){
-    $("#estimate").on('touchstart click', getEstimatesForSelectedVehicle);
+    $("#estimate").on('touchstart click', function(){
+	
+	var userLatitude = $("#userLatitude").val();
+	var userLongitude = $("#userLongitude").val();
+	var dropLatitude = $("#dropLatitude").val();
+	var dropLongitude = $("#dropLongitude").val();
+	var product_id = $('input[name="product"]:checked').val();
+	/*alert(userLatitude);
+	alert(userLongitude);
+	alert(dropLatitude);
+	alert(dropLongitude);
+	alert(product_id);
+	return false;*/
+    $.ajax({
+    url: "https://my-demo-bot.herokuapp.com/getPrice",    
+    data: { 
+    	start_latitude: userLatitude,
+    	start_longitude: userLongitude,
+    	end_latitude: dropLatitude,
+    	end_longitude: dropLongitude,
+		product_id: product_id
+    },
+    success: function(result) {
+		console.log(JSON.stringify(result));
+		//var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
+		//estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";
+		$("#time").html(result);
+    }
+	});
+	
+	});
 });
 
 function getEstimatesForSelectedVehicle() {

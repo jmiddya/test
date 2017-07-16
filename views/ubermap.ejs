@@ -257,6 +257,10 @@
   });
 }
 
+$(function(){
+    $("estimate").on('touchstart click', getEstimatesForSelectedVehicle);
+});
+
 function getEstimatesForSelectedVehicle() {
 	//alert('Hi');
 	var userLatitude = $("#userLatitude").val();

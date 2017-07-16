@@ -301,8 +301,10 @@ app.get('/getPrice', function(req, res) {
 	  res2.on("end", function () {
 		var body = Buffer.concat(chunks);
 		var json = JSON.parse(body);
-		//console.log('Fair_ID : '+json["fare"]["fare_id"]);	
-		res.send(json);
+		//console.log('Fair_ID : '+json["fare"]["fare_id"]);
+		var estimate = '<strong>Fare : ' + json.fare.currency_code+ ' ' + json.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + json.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
+		estimate += "Pick up is approximately in " + json.pickup_estimate + " minutes.";	
+		res.send(estimate);
 		//console.log(body);
 		//console.log(body.toString());
 		//console.log(json);

@@ -251,7 +251,7 @@
     },
     success: function(result) {
 		//alert(result);
-    	//console.log(JSON.stringify(result));
+    	console.log(JSON.stringify(result));
 		$("#vehicles").html(result);
     }
   });
@@ -280,10 +280,10 @@ function getEstimatesForSelectedVehicle() {
 		product_id: product_id
     },
     success: function(result) {
-		//console.log(JSON.stringify(result));
-		/*var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
-		estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";*/
-		$("#time").html('<h1>' + result.fare.currency_code+ ' ' + result.fare.value + '</h1>');
+		console.log(JSON.stringify(result));
+		//var estimate = '<strong>Fare : ' + result.fare.currency_code+ ' ' + result.fare.value + '</strong> <input type="hidden" name="fare_id" id="fare_id" value="' + result.fare.fare_id + '"><input type="button" value="Request" onclick="requestVehicle();"><br>';
+		//estimate += "Pick up is approximately in " + result.pickup_estimate + " minutes.";
+		$("#time").html(result);
     }
   });
 }
@@ -311,7 +311,7 @@ function requestVehicle() {
 		fare_id: fare_id
     },
     success: function(result) {
-		//console.log(JSON.stringify(result));
+		console.log(JSON.stringify(result));
 		var estimate = '<strong>Status : ' + result.status + ' | Vehicle :' + result.vehicle + ' | Driver :' + result.driver + '</strong> <input type="button" value="Cancell" onclick="cancellRequest();"><br>';
 		estimate += "Your car is arriving approximately in " + result.eta + " minutes.";
 		$("#time").html(estimate);

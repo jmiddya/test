@@ -251,7 +251,7 @@ var req2 = https.request(options, function (res2) {
 			}
 		
 		//console.log(allEstimate);
-		res.send(allEstimate+'<a href="getEstimatesForSelectedVehicle();"><input type="button" name="estimate" id="estimate" value="Get Estimate" ></a>');
+		res.send(allEstimate+'<a href="javascript:getEstimatesForSelectedVehicle();"><input type="button" name="estimate" id="estimate" value="Get Estimate" ></a>');
 		//res.send(allEstimate+'<input type="button" name="estimate" id="estimate" value="Get Estimate" onclick="getEstimatesForSelectedVehicle();" >');	
 	});
 	///////////// Added to get Estimatiion : END ///////////////  

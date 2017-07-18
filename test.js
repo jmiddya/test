@@ -315,7 +315,7 @@ app.get('/getPrice', function(req, res) {
 	});
 
 	req3.write(JSON.stringify({
-	  product_id: Product_id,	
+	  product_id: product_id,	
 	  start_latitude: userLatitude,
 	  start_longitude: userLongitude,
 	  end_latitude: dropLatitude,

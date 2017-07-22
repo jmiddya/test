@@ -154,6 +154,12 @@
 			$("#dropLatitude").val(dropLatitude);
 			$("#dropLongitude").val(dropLongitude);
 			
+			alert('Handler 2 called!');
+			alert(userLatitude);
+			alert(userLongitude);
+			alert(dropLatitude);
+			alert(dropLongitude);
+			
 		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
 			var map = new google.maps.Map(document.getElementById('map'));
 			var directionsService = new google.maps.DirectionsService;

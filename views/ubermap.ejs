@@ -142,7 +142,8 @@
 		var geocoder = new google.maps.Geocoder();
 
 		var address2 = document.getElementById('dropOff').value;
-		//alert(address2);
+		alert('Handler 2 called!');
+		alert(address2);
 		if(address2 != '')	
 		{
 		geocoder.geocode( { 'address': address2}, function(results, status) {
@@ -154,7 +155,6 @@
 			$("#dropLatitude").val(dropLatitude);
 			$("#dropLongitude").val(dropLongitude);
 			
-			alert('Handler 2 called!');
 			alert(userLatitude);
 			alert(userLongitude);
 			alert(dropLatitude);

@@ -97,7 +97,8 @@
 		var geocoder = new google.maps.Geocoder();
 
 		var address1 = document.getElementById('pickUp').value;	
-		//alert(address1);	
+		alert('Handler 1 called!');
+		alert(address1);	
 		if(address1 != '')	
 		{	
 		geocoder.geocode( { 'address': address1}, function(results, status) {
@@ -108,6 +109,11 @@
 			
 			$("#userLatitude").val(userLatitude);
 			$("#userLongitude").val(userLongitude);
+			
+			alert(userLatitude);
+			alert(userLongitude);
+			alert(dropLatitude);
+			alert(dropLongitude);
 			
 		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
 			//alert('Hi');

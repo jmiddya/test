@@ -98,8 +98,8 @@
 
 		//var address1 = document.getElementById('pickUp').value;
 		var address1 = this.value;
-		alert('Handler 1 called!');
-		alert(address1);	
+		//alert('Handler 1 called!');
+		//alert(address1);	
 		if(address1 != '')	
 		{	
 		geocoder.geocode( { 'address': address1}, function(results, status) {
@@ -111,10 +111,10 @@
 			$("#userLatitude").val(userLatitude);
 			$("#userLongitude").val(userLongitude);
 			
-			alert(userLatitude);
-			alert(userLongitude);
-			alert(dropLatitude);
-			alert(dropLongitude);
+			//alert(userLatitude);
+			//alert(userLongitude);
+			//alert(dropLatitude);
+			//alert(dropLongitude);
 			
 		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
 			//alert('Hi');
@@ -126,7 +126,7 @@
 			getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude);	
 			} else {
 			latlng = new google.maps.LatLng(userLatitude, userLongitude);
-			alert(latlng);
+			//alert(latlng);
 			var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: latlng
@@ -149,8 +149,8 @@
 		var geocoder = new google.maps.Geocoder();
 
 		var address2 = document.getElementById('dropOff').value;
-		alert('Handler 2 called!');
-		alert(address2);
+		//alert('Handler 2 called!');
+		//alert(address2);
 		if(address2 != '')	
 		{
 		geocoder.geocode( { 'address': address2}, function(results, status) {
@@ -162,10 +162,10 @@
 			$("#dropLatitude").val(dropLatitude);
 			$("#dropLongitude").val(dropLongitude);
 			
-			alert(userLatitude);
-			alert(userLongitude);
-			alert(dropLatitude);
-			alert(dropLongitude);
+			//alert(userLatitude);
+			//alert(userLongitude);
+			//alert(dropLatitude);
+			//alert(dropLongitude);
 			
 		    if(userLatitude != '' && userLongitude != '' && dropLatitude != '' && dropLongitude != '') {	
 			var map = new google.maps.Map(document.getElementById('map'));
@@ -299,17 +299,17 @@ $(function(){
 });
 
 function getEstimatesForSelectedVehicle() {
-	alert('href called the function!');
+	//alert('href called the function!');
 	var userLatitude = $("#userLatitude").val();
 	var userLongitude = $("#userLongitude").val();
 	var dropLatitude = $("#dropLatitude").val();
 	var dropLongitude = $("#dropLongitude").val();
 	var product_id = $('input[name="product"]:checked').val();
-	alert(userLatitude);
-	alert(userLongitude);
-	alert(dropLatitude);
-	alert(dropLongitude);
-	alert(product_id);
+	//alert(userLatitude);
+	//alert(userLongitude);
+	//alert(dropLatitude);
+	//alert(dropLongitude);
+	//alert(product_id);
 	//return false;
     $.ajax({
     url: "https://my-demo-bot.herokuapp.com/getPrice",    

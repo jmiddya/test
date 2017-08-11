@@ -205,11 +205,11 @@
 			infowindow.setContent('<div><strong>'+address+'</strong></div>');
             		infowindow.open(map, marker);
 			
-		  	//document.getElementById('pickUp').addEventListener('change', onChangeHandler1);
-		    	//document.getElementById('dropOff').addEventListener('change', onChangeHandler2);
+		  	document.getElementById('pickUp').addEventListener('change', onChangeHandler1);
+		    	document.getElementById('dropOff').addEventListener('change', onChangeHandler2);
 			
-			autocompletePickUp.addEventListener('change', onChangeHandler1);
-		    	autocompleteDropOff.addEventListener('change', onChangeHandler2);
+			//autocompletePickUp.addEventListener('change', onChangeHandler1);
+		    	//autocompleteDropOff.addEventListener('change', onChangeHandler2);
 	 }
 			
 	 function calculateAndDisplayRoute(directionsService, directionsDisplay) 

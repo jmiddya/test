@@ -123,7 +123,7 @@
 			var directionsDisplay = new google.maps.DirectionsRenderer;
 			directionsDisplay.setMap(map);	
 			calculateAndDisplayRoute(directionsService, directionsDisplay);	
-			getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude);	
+			getEstimatesForUserLocation();	
 			} else {
 			latlng = new google.maps.LatLng(userLatitude, userLongitude);
 			//alert(latlng);
@@ -173,7 +173,7 @@
 			var directionsDisplay = new google.maps.DirectionsRenderer;
 			directionsDisplay.setMap(map);	
 			calculateAndDisplayRoute(directionsService, directionsDisplay);	
-			getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude);	
+			getEstimatesForUserLocation();	
 			}
 			} 
 		});				
@@ -253,7 +253,7 @@
     
 <script>
 	
-function getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude) {
+function getEstimatesForUserLocation() {
     allEstimate = '';
     //console.log("Requesting updated time estimate...");
     

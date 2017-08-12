@@ -251,11 +251,17 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi00Ov6r2_VCaccgY1eNDDeYrdZOtk5QM&libraries=places&callback=initLocation">
     </script>
     
-	<script>
+<script>
 	
-	function getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude) {
-	allEstimate = '';
-	console.log("Requesting updated time estimate...");
+function getEstimatesForUserLocation(userLatitude, userLongitude, dropLatitude, dropLongitude) {
+    allEstimate = '';
+    //console.log("Requesting updated time estimate...");
+    
+    var userLatitude = $("#userLatitude").val();
+    var userLongitude = $("#userLongitude").val();
+    var dropLatitude = $("#dropLatitude").val();
+    var dropLongitude = $("#dropLongitude").val();
+    
     $.ajax({
     url: "https://my-demo-bot.herokuapp.com/uber",    
     data: { 

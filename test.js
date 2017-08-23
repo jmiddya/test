@@ -141,7 +141,7 @@ var getEstimatesForUserLocation = function(userLatitude, userLongitude, dropLati
 	///////////////////// For Products : START //////////////////////
 	var options = {
 	  "method": "GET",
-	  "hostname": "sandbox-api.uber.com",
+	  "hostname": "api.uber.com",
 	  //"port": null,
 	  "path": '/v1.2/products?latitude='+userLatitude+'&longitude='+userLongitude,
 	  "headers": {
@@ -281,7 +281,7 @@ app.get('/getPrice', function(req, res) {
 	
 	var options = {
 	  "method": "POST",
-	  "hostname": "sandbox-api.uber.com",
+	  "hostname": "api.uber.com",
 	  "path": '/v1.2/requests/estimate',
 	  "headers": {
 		'Authorization': "Bearer " + access_token,
@@ -335,7 +335,7 @@ app.get('/confirmRequest', function(req, res) {
 	
 	var options = {
 	  "method": "POST",
-	  "hostname": "sandbox-api.uber.com",
+	  "hostname": "api.uber.com",
 	  "path": '/v1.2/requests',
 	  "headers": {
 		'Authorization': "Bearer " + access_token,
@@ -383,7 +383,7 @@ app.get('/surge_confirmation', function(req, res) {
 app.get('/cancell', function(req, res) {
 	var options = {
 			  "method": "DELETE",
-			  "hostname": "sandbox-api.uber.com",
+			  "hostname": "api.uber.com",
 			  "path": '/v1.2/requests/current',
 			  "headers": {
 				'Authorization': "Bearer " + access_token,

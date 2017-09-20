@@ -4,7 +4,7 @@
   "description": "A sample Node.js app",
   "main": "test.js",
   "scripts": {
-    "start": "test.js"
+    "start": "node test.js"
   },
   "dependencies": {
     "body-parser": "^1.15.0",

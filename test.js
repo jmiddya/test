@@ -17,6 +17,14 @@ app.get('/', function(request, response) {
 })
 
 //////////JM : START//////////
+app.get('/.well-known/acme-challenge/qmz1gVIZLpkTva7PkMsGPcxdKcGiKkjJ_Dt2m3z-cyM', function(request, response) {
+  response.send('qmz1gVIZLpkTva7PkMsGPcxdKcGiKkjJ_Dt2m3z-cyM.cu3O-pa_-OLLjDuU95yDTVGil6DHHof7etjZLvwGVwI')
+})
+
+app.get('/.well-known/acme-challenge/uoNxUfYernbaLiZGqWHu5wfhYtA655PVRARLm6tI-XE', function(request, response) {
+  response.send('qmz1gVIZLpkTva7PkMsGPcxdKcGiKkjJ_Dt2m3z-cyM.cu3O-pa_-OLLjDuU95yDTVGil6DHHof7etjZLvwGVwI')
+})
+
 
 // Arbitrary value used to validate a webhook
 const VALIDATION_TOKEN = config.get('validationToken');

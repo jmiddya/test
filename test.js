@@ -143,7 +143,10 @@ app.post('/webhook', function(request, response) {
 		    {
 		      "text": 
 			{
-        		"text": weatherDetails
+        		"text": 
+			  [
+			   weatherDetails
+			  ]
 		        }      
 		    }
 		  ],

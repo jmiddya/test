@@ -143,12 +143,12 @@ app.post('/webhook', function(request, response) {
 		    {
 		      "text": 
 			{
-        		//"text": ["Partly cloudy!"]
-			"text": "Partly cloudy!"	
+        		"text": ["Partly cloudy!"]
+			//"text": "Partly cloudy!"	
 		        }      
 		    }
 		  ],
-		  "outputContexts": [{"name": "forecast"}],
+		  //"outputContexts": [{"name": "forecast"}],
 		  "source": "openweathermap"
 		  }
 	  	  //////////////// Preparing output JSON : END /////////////////

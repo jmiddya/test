@@ -141,7 +141,10 @@ app.post('/webhook', function(request, response) {
 		  "fulfillmentText": weatherDetails,
 		  "fulfillmentMessages": [
 		    {
-		      "text": weatherDetails,
+		      "text": 
+			{
+        		"text": weatherDetails
+		        }      
 		    }
 		  ],
 		  "outputContexts": [{"name": "forecast"}],

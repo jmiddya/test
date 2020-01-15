@@ -143,7 +143,8 @@ app.post('/webhook', function(request, response) {
 		    {
 		      "text": 
 			{
-        		"text": ["Partly cloudy!"]
+        		//"text": ["Partly cloudy!"]
+			"text": "Partly cloudy!"	
 		        }      
 		    }
 		  ],
